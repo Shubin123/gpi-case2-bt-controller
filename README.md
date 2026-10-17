@@ -25,6 +25,9 @@ cm4/
 │   ├── bluetooth.service.d/gamepad.conf  # bluetoothd -C -P input -f /storage/.config/bluetooth/main.conf
 │   ├── bt-state-monitor.service
 │   └── bt-ssh.service              # SSH over Bluetooth RFCOMM (authenticated+encrypted, keys only)
+├── assets/
+│   ├── make_icon.py                # Draws the menu icon (Pillow)
+│   └── bt_controller_*.png         # XMB icon for the "Bluetooth Controller" playlist (white + colour themes)
 └── playlists/
     └── Bluetooth Controller.lpl    # "Controller Mode" and "Pair a New Mac / PC"
 ```

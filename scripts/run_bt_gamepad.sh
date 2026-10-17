@@ -21,7 +21,14 @@ for i in $(seq 1 30); do
     sleep 0.2
 done
 
-# 4. Bluetooth must be powered; HID PSMs must be free (bluetoothd -P input)
+# 4. Bluetooth must be running and powered, even if it was switched off in Lakka's settings
+if ! systemctl is-active --quiet bluetooth; then
+    rm -f /storage/.cache/services/bluez.disabled
+    touch /storage/.cache/services/bluez.conf      # what Lakka's Bluetooth toggle does
+    systemctl start bluetooth
+    for i in $(seq 1 25); do bluetoothctl show >/dev/null 2>&1 && break; sleep 0.2; done
+fi
+rfkill unblock bluetooth 2>/dev/null
 /usr/bin/hciconfig hci0 up 2>/dev/null
 bluetoothctl power on >/dev/null 2>&1
 

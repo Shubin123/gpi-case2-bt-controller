@@ -52,9 +52,24 @@ ssh "root@$TARGET_HOST" '
     sed -i "s/^smeupports_no_game/supports_no_game/" /storage/cores/bash_launcher_libretro.info 2>/dev/null || true
 '
 
-echo "[3/5] Installing systemd units and playlists..."
+echo "[3/5] Installing systemd units, playlists and menu icons..."
 scp -q "$SCRIPT_DIR/services/"*.service "root@$TARGET_HOST:/storage/.config/system.d/"
 scp -q "$SCRIPT_DIR/playlists/"* "root@$TARGET_HOST:/storage/playlists/"
+scp -q "$SCRIPT_DIR/assets/bt_controller_white.png" "$SCRIPT_DIR/assets/bt_controller_color.png" "root@$TARGET_HOST:/tmp/"
+ssh "root@$TARGET_HOST" '
+    # XMB playlist icon = <assets>/xmb/<theme>/png/<playlist name>.png (+ -content.png for its entries).
+    # Write through RetroArch'"'"'s /tmp/assets overlay (its upper layer is /storage/assets, so it persists).
+    A=/tmp/assets; mountpoint -q $A || A=/storage/assets
+    for theme in $(ls /usr/share/retroarch/assets/xmb); do
+        case "$theme" in flatui|pixel|dot-art) src=/tmp/bt_controller_color.png ;; *) src=/tmp/bt_controller_white.png ;; esac
+        d=$A/xmb/$theme/png
+        mkdir -p "$d"
+        cp "$src" "$d/Bluetooth Controller.png"
+        cp "$src" "$d/Bluetooth Controller-content.png"
+        rm -f "$d/Host Controller Mode.png" "$d/Host Controller Mode-content.png"
+    done
+    rm -f /tmp/bt_controller_white.png /tmp/bt_controller_color.png
+'
 
 echo "[4/5] Restarting Bluetooth stack..."
 ssh "root@$TARGET_HOST" '
@@ -79,6 +94,6 @@ ssh "root@$TARGET_HOST" '
 
 echo ""
 echo "=== Deployment complete ==="
-echo "Pair: RetroArch > Bluetooth Controller > 'Make Pairable', then on the Mac:"
-echo "      System Settings > Bluetooth > 'Wireless Controller' > Connect, and press [A] on the"
-echo "      handheld when the 6-digit code matches."
+echo "Pair (once): on the GPi choose RetroArch > Bluetooth Controller > 'Pair a New Mac / PC',"
+echo "             then on the Mac: System Settings > Bluetooth > 'Wireless Controller' > Connect."
+echo "Use:         RetroArch > Bluetooth Controller > 'Controller Mode'."
