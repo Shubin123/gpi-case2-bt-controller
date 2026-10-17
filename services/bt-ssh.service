@@ -1,0 +1,18 @@
+[Unit]
+Description=Bluetooth SSH Server (RFCOMM SPP)
+After=bluetooth.service
+Requires=bluetooth.service
+BindsTo=bluetooth.service
+PartOf=bluetooth.service
+
+[Service]
+Type=simple
+# sdptool needs bluetoothd -C (see bluetooth.service.d/gamepad.conf); add the SPP record once
+ExecStartPre=-/bin/sh -c 'sdptool browse local 2>/dev/null | grep -q "Serial Port" || sdptool add --channel=1 SP'
+# -A -E: only authenticated (paired) and encrypted links; sshd: public keys only, root only
+ExecStart=/usr/bin/rfcomm -A -E -r watch 0 1 /usr/sbin/sshd -i -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o PermitRootLogin=prohibit-password -o AllowUsers=root -o MaxAuthTries=3 -o LoginGraceTime=30
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=bluetooth.service

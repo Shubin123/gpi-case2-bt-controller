@@ -1,0 +1,13 @@
+[Unit]
+Description=Bluetooth State Monitor (Auto ON/OFF and Discoverable)
+After=bluetooth.service
+Wants=bluetooth.service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /storage/scripts/bt_state_monitor.sh
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,44 @@
+{
+  "version": "1.5",
+  "default_core_path": "/storage/cores/bash_launcher_libretro.so",
+  "default_core_name": "Bash Launcher",
+  "label_display_mode": 0,
+  "right_thumbnail_mode": 0,
+  "left_thumbnail_mode": 0,
+  "thumbnail_match_mode": 0,
+  "sort_mode": 0,
+  "items": [
+    {
+      "path": "/storage/roms/windows/RainWorld.sh",
+      "label": "Rain World (Wine/Proton x86_64)",
+      "core_path": "/storage/cores/bash_launcher_libretro.so",
+      "core_name": "Bash Launcher",
+      "crc32": "DETECT",
+      "db_name": "Microsoft - Windows.lpl"
+    },
+    {
+      "path": "/storage/roms/windows/Windows x86 (DOSBox-Pure).bat",
+      "label": "Windows x86 (DOSBox-Pure: Win95/98/3.1)",
+      "core_path": "/tmp/cores/dosbox_pure_libretro.so",
+      "core_name": "DOS (DOSBox-Pure)",
+      "crc32": "DETECT",
+      "db_name": "Microsoft - Windows.lpl"
+    },
+    {
+      "path": "/storage/roms/windows/Wine & Proton Compatibility (x86 & x64).bat",
+      "label": "Wine & Proton (x86/x64 Windows Compatibility)",
+      "core_path": "/tmp/cores/dosbox_pure_libretro.so",
+      "core_name": "DOS (DOSBox-Pure)",
+      "crc32": "DETECT",
+      "db_name": "Microsoft - Windows.lpl"
+    },
+    {
+      "path": "/storage/roms/windows/IBM PC-XT (VirtualXT x86).boot",
+      "label": "IBM PC-XT (VirtualXT 8086 x86)",
+      "core_path": "/tmp/cores/virtualxt_libretro.so",
+      "core_name": "VirtualXT",
+      "crc32": "DETECT",
+      "db_name": "Microsoft - Windows.lpl"
+    }
+  ]
+}

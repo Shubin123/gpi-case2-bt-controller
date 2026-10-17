@@ -1,0 +1,27 @@
+{
+  "version": "1.5",
+  "default_core_path": "/storage/cores/bash_launcher_libretro.so",
+  "default_core_name": "Bash Launcher",
+  "label_display_mode": 0,
+  "right_thumbnail_mode": 0,
+  "left_thumbnail_mode": 0,
+  "sort_mode": 0,
+  "items": [
+    {
+      "path": "/storage/scripts/start_controller_connect.sh",
+      "label": "🎮 Controller Mode (reconnect to my Mac / PC)",
+      "core_path": "/storage/cores/bash_launcher_libretro.so",
+      "core_name": "Bash Launcher",
+      "crc32": "",
+      "db_name": "Bluetooth Controller.lpl"
+    },
+    {
+      "path": "/storage/scripts/start_controller_pair.sh",
+      "label": "🔗 Pair a New Mac / PC",
+      "core_path": "/storage/cores/bash_launcher_libretro.so",
+      "core_name": "Bash Launcher",
+      "crc32": "",
+      "db_name": "Bluetooth Controller.lpl"
+    }
+  ]
+}
